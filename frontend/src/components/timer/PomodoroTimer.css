@@ -20,7 +20,7 @@
    
     z-index: -2;
 }
-// tạo lớp đen phủ lên:
+/* tạo lớp đen phủ lên: */
 .timer-overlay {
     position: absolute;
     inset: 0;

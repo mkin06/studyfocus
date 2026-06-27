@@ -9,6 +9,7 @@ import ProfilePage from '../profile/UserProfile';
 import { studySessionAPI } from '../../api/studySession';
 import { useToast } from '../../contexts/ToastContext';
 import NotesPanel from '../notes/NotesPanel';
+import MusicModal from './MusicModal';
 
 // SVG Icon imports
 import upgradeIcon from '../../assets/user-menu/gift.svg';
@@ -205,6 +206,8 @@ export default function PomodoroTimer() {
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [isPiPMode, setIsPiPMode] = useState(false);
   const [showNotes, setShowNotes] = useState(false);
+  const [showMusic, setShowMusic] = useState(false);
+  const [musicVideoId, setMusicVideoId] = useState('jfKfPfyJRdk'); // default lofi girl stream
 
   // Refs
   const userMenuRef = useRef(null);
@@ -612,7 +615,10 @@ const handleMenuItemClick = useCallback(async (itemId) => {
         <FooterButtonsGroup
           buttons={FOOTER_BUTTONS_LEFT}
           direction="left"
-          onButtonClick={(id) => { if (id === 'notes') setShowNotes(true); }}
+          onButtonClick={(id) => {
+            if (id === 'notes') setShowNotes(true);
+            if (id === 'music') setShowMusic(prev => !prev);
+          }}
         />
         <FooterButtonsGroup buttons={FOOTER_BUTTONS_RIGHT} direction="right" />
       </footer>
@@ -630,6 +636,12 @@ const handleMenuItemClick = useCallback(async (itemId) => {
       {showNotes && (
         <NotesPanel onClose={() => setShowNotes(false)} />
       )}
+      <MusicModal
+        isOpen={showMusic}
+        onClose={() => setShowMusic(false)}
+        videoId={musicVideoId}
+        onUpdateVideoId={setMusicVideoId}
+      />
     </div>
   );
 }
