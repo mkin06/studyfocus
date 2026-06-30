@@ -10,6 +10,7 @@ import { studySessionAPI } from '../../api/studySession';
 import { useToast } from '../../contexts/ToastContext';
 import NotesPanel from '../notes/NotesPanel';
 import MusicModal from './MusicModal';
+import BackgroundModal from './BackgroundModal';
 
 // SVG Icon imports
 import upgradeIcon from '../../assets/user-menu/gift.svg';
@@ -208,6 +209,14 @@ export default function PomodoroTimer() {
   const [showNotes, setShowNotes] = useState(false);
   const [showMusic, setShowMusic] = useState(false);
   const [musicVideoId, setMusicVideoId] = useState('jfKfPfyJRdk'); // default lofi girl stream
+  const [showBackground, setShowBackground] = useState(false);
+  const [scene, setScene] = useState({
+    type: 'image',
+    url: backgroundImage,
+    id: 'default',
+    opacity: 0.3,
+    weather: 'clear',
+  });
 
   // Refs
   const userMenuRef = useRef(null);
@@ -474,12 +483,35 @@ const handleMenuItemClick = useCallback(async (itemId) => {
   // ========== RENDER ==========
   return (
     <div className="timer-container">
-      <div
-        className="timer-background"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-        role="presentation"
+      {scene.type === 'video' ? (
+        <video
+          key={scene.url}
+          className="timer-background-video"
+          src={scene.url}
+          autoPlay
+          loop
+          muted
+          playsInline
+          role="presentation"
+        />
+      ) : (
+        <div
+          className="timer-background"
+          style={{ backgroundImage: `url(${scene.url})` }}
+          role="presentation"
+        />
+      )}
+
+      {/* Weather Particle Overlays */}
+      {scene.weather === 'rain' && <RainOverlay />}
+      {scene.weather === 'snow' && <SnowOverlay />}
+      {scene.weather === 'storm' && <StormOverlay />}
+
+      <div 
+        className="timer-overlay" 
+        style={{ backgroundColor: `rgba(0, 0, 0, ${scene.opacity})` }} 
+        role="presentation" 
       />
-      <div className="timer-overlay" role="presentation" />
 
 <header className="timer-header">
         <div className="logo">
@@ -618,6 +650,7 @@ const handleMenuItemClick = useCallback(async (itemId) => {
           onButtonClick={(id) => {
             if (id === 'notes') setShowNotes(true);
             if (id === 'music') setShowMusic(prev => !prev);
+            if (id === 'background') setShowBackground(true);
           }}
         />
         <FooterButtonsGroup buttons={FOOTER_BUTTONS_RIGHT} direction="right" />
@@ -642,6 +675,78 @@ const handleMenuItemClick = useCallback(async (itemId) => {
         videoId={musicVideoId}
         onUpdateVideoId={setMusicVideoId}
       />
+      {showBackground && (
+        <BackgroundModal
+          onClose={() => setShowBackground(false)}
+          scene={scene}
+          onChangeScene={setScene}
+        />
+      )}
+    </div>
+  );
+}
+
+// ========== WEATHER PARTICLE COMPONENTS ==========
+function RainOverlay() {
+  const drops = Array.from({ length: 80 });
+  return (
+    <div className="weather-overlay rain-overlay" role="presentation">
+      {drops.map((_, i) => {
+        const left = Math.random() * 100;
+        const delay = Math.random() * 2;
+        const duration = 0.8 + Math.random() * 0.5;
+        const opacity = 0.1 + Math.random() * 0.3;
+        return (
+          <div
+            key={i}
+            className="rain-drop"
+            style={{
+              left: `${left}%`,
+              animationDelay: `${delay}s`,
+              animationDuration: `${duration}s`,
+              opacity: opacity,
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function SnowOverlay() {
+  const flakes = Array.from({ length: 60 });
+  return (
+    <div className="weather-overlay snow-overlay" role="presentation">
+      {flakes.map((_, i) => {
+        const left = Math.random() * 100;
+        const delay = Math.random() * 5;
+        const duration = 3 + Math.random() * 4;
+        const size = 2 + Math.random() * 4;
+        const opacity = 0.2 + Math.random() * 0.5;
+        return (
+          <div
+            key={i}
+            className="snow-flake"
+            style={{
+              left: `${left}%`,
+              animationDelay: `${delay}s`,
+              animationDuration: `${duration}s`,
+              width: `${size}px`,
+              height: `${size}px`,
+              opacity: opacity,
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
+function StormOverlay() {
+  return (
+    <div className="weather-overlay storm-overlay" role="presentation">
+      <div className="lightning-flash" />
+      <RainOverlay />
     </div>
   );
 }
