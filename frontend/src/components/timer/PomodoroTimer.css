@@ -21,6 +21,7 @@
     background-position: center;
     z-index: -2;
 }
+/* tạo lớp đen phủ lên: */
 
 .timer-background-video {
     position: absolute;
@@ -30,7 +31,6 @@
     object-fit: cover;
     z-index: -2;
 }
-
 .timer-overlay {
     position: absolute;
     inset: 0;
