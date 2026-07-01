@@ -713,7 +713,7 @@ function RainOverlay() {
         const left = Math.random() * 100;
         const delay = Math.random() * 2;
         const duration = 0.8 + Math.random() * 0.5;
-        const opacity = 0.1 + Math.random() * 0.3;
+        const opacity = 0.3 + Math.random() * 0.4;
         return (
           <div
             key={i}
@@ -739,8 +739,8 @@ function SnowOverlay() {
         const left = Math.random() * 100;
         const delay = Math.random() * 5;
         const duration = 3 + Math.random() * 4;
-        const size = 2 + Math.random() * 4;
-        const opacity = 0.2 + Math.random() * 0.5;
+        const size = 3 + Math.random() * 4;
+        const opacity = 0.5 + Math.random() * 0.4;
         return (
           <div
             key={i}
