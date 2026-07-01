@@ -29,6 +29,11 @@ import chattingIcon from '../../assets/ground/chatting.svg';
 import findUser from '../../assets/ground/finduser.svg';
 import focusLightning from '../../assets/ground/lightning.svg';
 import clockIcon from '../../assets/ground/clock.svg';
+import fireIcon from '../../assets/ground/fire.svg';
+import stopwatchIcon from '../../assets/ground/stopwatch.svg';
+import chartIcon from '../../assets/ground/chart.svg';
+import bellIcon from '../../assets/ground/bell.svg';
+import targetIcon from '../../assets/ground/target.svg';
 import settingClockIcon from '../../assets/user-menu/settingClock.svg';
 
 
@@ -515,18 +520,31 @@ const handleMenuItemClick = useCallback(async (itemId) => {
 
 <header className="timer-header">
         <div className="logo">
-          <span className="logo-icon" aria-hidden="true">🎯</span>
-          <span className="logo-text">StudyFocus</span>
+          <span className="logo-icon" aria-hidden="true">
+            <img src={targetIcon} alt="" className="logo-icon-svg" width="28" height="28" />
+          </span>
+          <span className="logo-text">DoroStudy</span>
           <button className="deep-focus-btn" aria-label="Enter deep focus mode">
-            ⚡ Deep Focus
+            <img src={focusLightning} alt="" className="deep-focus-icon" width="16" height="16" />
+            Deep Focus
           </button>
         </div>
 
         <div className="header-right">
-          <button className="stat-btn" aria-label="Streak: 1">🔥 1</button>
-          <button className="stat-btn" aria-label="Study time: 0 minutes">⏱️ 0m</button>
-          <button className="stat-btn" aria-label="Statistics">📊</button>
-          <button className="stat-btn" aria-label="Notifications">🔔</button>
+          <button className="stat-btn" aria-label="Streak: 1">
+            <img src={fireIcon} alt="" className="header-stat-icon" width="18" height="18" />
+            <span>1</span>
+          </button>
+          <button className="stat-btn" aria-label="Study time: 0 minutes">
+            <img src={stopwatchIcon} alt="" className="header-stat-icon" width="18" height="18" />
+            <span>0m</span>
+          </button>
+          <button className="stat-btn" aria-label="Statistics">
+            <img src={chartIcon} alt="" className="header-stat-icon" width="18" height="18" />
+          </button>
+          <button className="stat-btn" aria-label="Notifications">
+            <img src={bellIcon} alt="" className="header-stat-icon" width="18" height="18" />
+          </button>
           <button className="user-menu" aria-label="Enter user's study room">
             User's room
           </button>

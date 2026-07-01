@@ -99,6 +99,9 @@
 
 .tab-icon {
     font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
@@ -353,6 +356,18 @@
 
 .toggle-icon {
     font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Modal SVG icon - same style as footer icons */
+.modal-icon-svg {
+    width: 18px;
+    height: 18px;
+    display: inline-block;
+    filter: invert(1) brightness(1.2) contrast(1.1);
+    transition: filter 0.2s ease;
 }
 
 /* ========== TOGGLE SWITCH ========== */

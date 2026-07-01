@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import './SettingsModal.css';
+import settingsTimerIcon from '../../assets/ground/clock.svg';
+import settingsStopwatchIcon from '../../assets/ground/stopwatch.svg';
+import settingsArrowUpIcon from '../../assets/settingModel/arrowup.svg';
+import settingsDeepFocusIcon from '../../assets/ground/lightning.svg';
 
 export const PRESETS = [
     { id: 1, name: 'Classic Pomodoro', focus: 25, short: 5, long: 15, deletable: false },
@@ -49,14 +53,18 @@ export default function SettingsModal({ onClose, onPresetChange }) {
                         className={`modal-tab ${activeTab === 'focus' ? 'active' : ''}`}
                         onClick={() => setActiveTab('focus')}
                     >
-                        <span className="tab-icon">⏱️</span>
+                        <span className="tab-icon">
+                            <img src={settingsTimerIcon} alt="" className="modal-icon-svg" width="18" height="18" />
+                        </span>
                         Focus Timer
                     </button>
                     <button
                         className={`modal-tab ${activeTab === 'stopwatch' ? 'active' : ''}`}
                         onClick={() => setActiveTab('stopwatch')}
                     >
-                        <span className="tab-icon">⏱️</span>
+                        <span className="tab-icon">
+                            <img src={settingsStopwatchIcon} alt="" className="modal-icon-svg" width="18" height="18" />
+                        </span>
                         Stopwatch
                     </button>
                 </div>
@@ -126,7 +134,9 @@ export default function SettingsModal({ onClose, onPresetChange }) {
                     {/* Toggle Count up timer */}
                     <div className="modal-row toggle-row">
                         <div className="toggle-item">
-                            <span className="toggle-icon">⬆️</span>
+                            <span className="toggle-icon">
+                                <img src={settingsArrowUpIcon} alt="" className="modal-icon-svg" width="18" height="18" />
+                            </span>
                             <span>Count up timer</span>
                         </div>
                         <label className="toggle-switch">
@@ -142,7 +152,9 @@ export default function SettingsModal({ onClose, onPresetChange }) {
                     {/* Toggle Deep Focus */}
                     <div className="modal-row toggle-row">
                         <div className="toggle-item">
-                            <span className="toggle-icon">⚠️</span>
+                            <span className="toggle-icon">
+                                <img src={settingsDeepFocusIcon} alt="" className="modal-icon-svg" width="18" height="18" />
+                            </span>
                             <span>Deep Focus</span>
                         </div>
                         <label className="toggle-switch">
