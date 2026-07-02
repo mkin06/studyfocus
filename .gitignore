@@ -22,3 +22,8 @@ studyfocus/
 frontend/.env
 .vscode/
 .vscode/
+
+
+node_modules/
+
+backlog.md
